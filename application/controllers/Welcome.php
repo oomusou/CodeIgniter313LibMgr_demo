@@ -6,18 +6,34 @@ class Welcome extends CI_Controller
     /** @var MyService */
     private $myService;
 
+    /** @var MyModel */
+    private $myModel;
+
     /**
      * Welcome constructor.
      */
     public function __construct()
     {
         parent::__construct();
-        $this->myService = $this->libMgr->load('MyService');
+        $this->myService = $this->libMgr->loadService('MyService');
+        $this->myModel = $this->libMgr->loadModel('MyModel');
     }
 
-    public function index()
+    /**
+     * 載入 service 範例
+     */
+    public function loadService()
     {
         $data['message'] = $this->myService->getMessage();
+        $this->load->view('welcome_message', $data);
+    }
+
+    /**
+     * 載入 model 範例
+     */
+    public function loadModel()
+    {
+        $data['message'] = $this->myModel->getMessage();
         $this->load->view('welcome_message', $data);
     }
 }

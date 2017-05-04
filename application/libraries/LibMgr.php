@@ -15,10 +15,26 @@ class LibMgr
     }
 
 
-    public function load(string $className)
+    /**
+     * 統一載入 service 方式
+     * @param string $className
+     * @return mixed
+     */
+    public function loadService(string $className)
     {
         $this->CI->load->library($className);
         $lowerClassName = strtolower($className);
         return $this->CI->$lowerClassName;
+    }
+
+    /**
+     * 統一載入 model 方式
+     * @param string $className
+     * @return mixed
+     */
+    public function loadModel(string $className)
+    {
+        $this->CI->load->model($className);
+        return $this->CI->$className;
     }
 }
